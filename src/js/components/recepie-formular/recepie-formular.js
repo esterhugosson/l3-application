@@ -34,8 +34,8 @@ template.innerHTML = `
     <h2> Add a recipe:</h2>
 
     <form id="recipeForm">
-        <input type="text" id="recipeTitle" placeholder="Recipe Title" >
-        <input type="url" id="recipeLink" placeholder="Recipe URL" >
+        <input type="text" id="recipeTitle" placeholder="Recipe Title" required>
+        <input type="url" id="recipeLink" placeholder="Recipe URL" required>
         <button type="submit">Add Recipe</button>
     </form>
 
@@ -69,9 +69,10 @@ customElements.define('recepie-formular',
             event.preventDefault()
 
             const title = this.titleInput.value
+            const key = `recipe_${title}`
             const link = this.linkInput.value
 
-            this.saveRecepieInStorage(title, link)
+            this.saveRecepieInStorage(key, link)
 
             this.form.reset()
             
