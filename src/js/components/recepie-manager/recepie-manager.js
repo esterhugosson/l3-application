@@ -30,10 +30,5 @@ customElements.define('recepie-manager',
             this.attachShadow({ mode: 'open' }).appendChild(template.content.cloneNode(true))
         }
 
-
-
-
-
-
     }
 )
