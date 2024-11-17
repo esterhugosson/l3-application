@@ -133,21 +133,35 @@ customElements.define('saved-recepies',
 
             const li = document.createElement('li')
 
-            const recipeContent = document.createElement('div')
+            const recipeContent = this.createRecipeContent(key, recipe)
+            li.appendChild(recipeContent)
+
+            const deleteButton = this.createDeleteButton(key)
+            li.appendChild(deleteButton)
+
+            this.list.appendChild(li)
+
+        }
+
+        createRecipeContent(key, recipe) {
+
+            const recipeContent = document.createElement('div');
             recipeContent.innerHTML = `
             <strong>${key.replace('recipe_', '')}</strong><br>
             <a href="${recipe}" target="_blank" class="recipe-link">${recipe}</a>
             `
 
+            return recipeContent;
+        }
+
+        createDeleteButton(key) {
             const deleteButton = document.createElement('button')
             deleteButton.textContent = 'Delete'
+            deleteButton.classList.add('delete-button')
+
             deleteButton.addEventListener('click', () => this.deleteRecipe(key))
-
-
-            li.appendChild(recipeContent)
-            li.appendChild(deleteButton)
-            this.list.appendChild(li)
-
+            
+            return deleteButton;
         }
 
         deleteRecipe(key) {
