@@ -3,23 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
     <title>Recipe Manager</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <script type="module" src="./js/components/recepie-formular/index.js"></script>
+    <script type="module" src="./js/components/recepie-manager/index.js"></script>
+    <script type="module" src="./js/components/saved-recepies/index.js"></script>
+    
 </head>
 <body>
 
-    <h1> My recipe manager </h1>
+    <recepie-manager> </recepie-manager>
 
-    <form id="recipeForm">
-        <input type="text" id="recipeTitle" placeholder="Recipe Title" required>
-        <input type="url" id="recipeLink" placeholder="Recipe URL" required>
-        <textarea id="recipeNotes" placeholder="Notes (optional)"></textarea>
-        <button type="submit">Add Recipe</button>
-    </form>
-    
-    <h2>Saved Recipes</h2>
-    <ul id="recipeList"></ul>
-
-    <script src="./index.js" type="module"></script>  
 </body>
 </html>
