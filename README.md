@@ -6,7 +6,7 @@ Here you can add links to all the recepies you want to do. So you can easy find 
 
 
 # Key features
-- Add a Recipe: Users can save a link to a recipe along with a title and optional notes.
+- Add a Recipe: Users can save a link to a recipe along with a title.
 - View Recipes: Display a list of saved recipes with options to filter or search.
 - Delete Recipes: Users to remove recipes they no longer need.
 - Clear all recepies: Users can remove all saved recepies in an easy way.
