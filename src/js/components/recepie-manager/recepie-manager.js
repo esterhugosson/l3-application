@@ -7,6 +7,7 @@
 
 import '../recepie-formular/index.js'
 import '../saved-recepies/index.js'
+import '../clear-button/index.js'
 
 // Define a template
 const template = document.createElement('template')
@@ -15,6 +16,8 @@ template.innerHTML = `
     <h1> My recipe manager </h1>
 
     <saved-recepies> </saved-recepies>
+
+    <clear-button> </clear-button>
 
     <recepie-formular> </recepie-formular>
 
