@@ -117,7 +117,9 @@ customElements.define('saved-recepies',
 
         displayRecipes(keys) {
 
-            keys.forEach(key => {
+            const recipeKeys = keys.filter(key => key.startsWith('recipe_'))
+
+            recipeKeys.forEach(key => {
 
                 const recipe = this.wrapper.retrieveData(key)
                 if (recipe) {
@@ -133,7 +135,7 @@ customElements.define('saved-recepies',
 
             const recipeContent = document.createElement('div')
             recipeContent.innerHTML = `
-            <strong>${key}</strong><br>
+            <strong>${key.replace('recipe_', '')}</strong><br>
             <a href="${recipe}" target="_blank" class="recipe-link">${recipe}</a>
             `
 
