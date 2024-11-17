@@ -3,15 +3,6 @@ body {
     margin: 20px;
 }
 
-button {
-    padding: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-
 /* form {
     margin-bottom: 20px;
 }
@@ -23,6 +14,13 @@ input, textarea {
     width: 100%;
 }
 
+button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
 
 ul {
     list-style-type: none;
