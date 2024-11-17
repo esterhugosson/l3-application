@@ -73,7 +73,7 @@ customElements.define('recepie-formular',
         }
 
         connectedCallback() {
-            this.form.addEventListener('submit', (event) => this.onSubmitRecipeForm.bind(event))
+            this.form.addEventListener('submit', (event) => this.onSubmitRecipeForm(event))
         }
 
         disconnectedCallback() {
@@ -122,10 +122,12 @@ customElements.define('recepie-formular',
 
         showSuccessMessage() {
             this.successMessage.style.display = 'block'
+            this.form.style.display = 'none'
         }
     
         hideSuccessMessage() {
             this.successMessage.style.display = 'none'
+            this.form.style.display = 'block'
         }
 
     }
