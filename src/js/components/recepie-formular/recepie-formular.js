@@ -6,6 +6,9 @@
  */
 
 import { StorageWrapper } from "../storageWrapper/storageWrapper.js"
+
+const SUCCESS_MESSAGE_DISPLAY_DURATION = 3000
+
 // Define a template
 const template = document.createElement('template')
 template.innerHTML = `
@@ -29,6 +32,15 @@ template.innerHTML = `
     border: none;
     cursor: pointer;
     }
+
+    .success-message {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    margin-top: 10px;
+    text-align: center;
+    display: none; 
+    }
     </style>
 
     <h2> Add a recipe:</h2>
@@ -38,6 +50,8 @@ template.innerHTML = `
         <input type="url" id="recipeLink" placeholder="Recipe URL" required>
         <button type="submit">Add Recipe</button>
     </form>
+
+    <div class="success-message" id="successMessage">Recipe added successfully!</div>
 
 `
 customElements.define('recepie-formular',
@@ -53,36 +67,39 @@ customElements.define('recepie-formular',
             this.titleInput = this.shadowRoot.querySelector('#recipeTitle')
             this.linkInput = this.shadowRoot.querySelector('#recipeLink')
             this.noteInput = this.shadowRoot.querySelector('#recipeNotes')
+            this.successMessage = this.shadowRoot.querySelector('#successMessage')
 
             this.wrapper = new StorageWrapper()
         }
 
         connectedCallback() {
-            this.form.addEventListener('submit', (event) => this.handleRecepieSubmit(event))
+            this.form.addEventListener('submit', (event) => this.onSubmitRecipeForm.bind(event))
         }
 
         disconnectedCallback() {
-            this.form.removeEventListener('submit', this.handleRecepieSubmit)
+            this.form.removeEventListener('submit', this.onSubmitRecipeForm)
         }
 
-        handleRecepieSubmit(event) {
+        onSubmitRecipeForm(event) {
             event.preventDefault()
 
             const title = this.titleInput.value
-            const key = `recipe_${title}`
             const link = this.linkInput.value
 
-            this.saveRecepieInStorage(key, link)
+            this.saveRecepieInStorage(title, link)
 
             this.form.reset()
-            window.location.reload()
+
+            this.showSuccessMessageForDuration()
             
         }
 
         saveRecepieInStorage(title, value) {
 
             try {
-                this.wrapper.storeData(title, value)
+                const key = `recipe_${title}`
+
+                this.wrapper.storeData(key, value)
 
             } catch (error) {
                 console.error('Failed to save recipe:', error)
@@ -92,9 +109,24 @@ customElements.define('recepie-formular',
             
         }
 
+        showSuccessMessageForDuration() {
 
+            this.showSuccessMessage()
 
+            setTimeout(() => {
+                this.hideSuccessMessage()
+                window.location.reload()
+            }, SUCCESS_MESSAGE_DISPLAY_DURATION)
 
+        }
+
+        showSuccessMessage() {
+            this.successMessage.style.display = 'block'
+        }
+    
+        hideSuccessMessage() {
+            this.successMessage.style.display = 'none'
+        }
 
     }
 )
