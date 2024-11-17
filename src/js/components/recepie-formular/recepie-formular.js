@@ -75,6 +75,7 @@ customElements.define('recepie-formular',
             this.saveRecepieInStorage(key, link)
 
             this.form.reset()
+            window.location.reload()
             
         }
 
