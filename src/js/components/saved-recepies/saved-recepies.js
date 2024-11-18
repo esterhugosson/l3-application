@@ -78,8 +78,9 @@ template.innerHTML = `
 
 
 
-    <h2>Saved Recipes</h2>
+    <h2>Saved Recipes: </h2>
     <ul id="recipeList"></ul>
+    <h2 id="noRecipesMessage" style="display: none;">No recipes saved yet!</h2>
 
 
 `
@@ -94,20 +95,26 @@ customElements.define('saved-recepies',
             this.attachShadow({ mode: 'open' }).appendChild(template.content.cloneNode(true))
 
             this.list = this.shadowRoot.querySelector('#recipeList')
+            this.noRecipesMessage = this.shadowRoot.querySelector('#noRecipesMessage')
             this.wrapper = new StorageWrapper()
         }
 
         connectedCallback() {
-            this.renderRecipeList()
+            this.displayRecipesList()
         }
 
-        renderRecipeList() {
+        displayRecipesList() {
 
             this.clearList()
 
-            const keys = Object.keys(localStorage)
+            const recipeKeys = this.getRecipeKeys()
 
-            this.displayRecipes(keys)
+            if (recipeKeys.length === 0) {
+                this.showNoRecipesMessage()
+            } else {
+                this.hideNoRecipesMessage()
+                this.displayRecipes(recipeKeys)
+            }
 
         }
 
@@ -115,9 +122,20 @@ customElements.define('saved-recepies',
             this.list.innerHTML = ''
         }
 
-        displayRecipes(keys) {
+        getRecipeKeys() {
+            const keys = Object.keys(localStorage)
+            return keys.filter(key => key.startsWith('recipe_'))
+        }
 
-            const recipeKeys = keys.filter(key => key.startsWith('recipe_'))
+        showNoRecipesMessage() {
+            this.noRecipesMessage.style.display = 'block'
+        }
+
+        hideNoRecipesMessage() {
+            this.noRecipesMessage.style.display = 'none'
+        }
+
+        displayRecipes(recipeKeys) {
 
             recipeKeys.forEach(key => {
 
@@ -167,7 +185,7 @@ customElements.define('saved-recepies',
 
         deleteRecipe(key) {
             this.wrapper.removeData(key)
-            this.renderRecipeList()
+            this.displayRecipesList()
         }
 
 
