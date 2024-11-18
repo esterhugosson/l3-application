@@ -44,7 +44,7 @@ The Recipe Manager lets users store links to recipes they want to try, along wit
 
 The application is live and can be accessed here:
 
-[Recipe Manager - Live Demo](https://app.netlify.com/sites/moonlit-caramel-feb7b6/overview)
+[Recipe Manager - Live Demo](https://moonlit-caramel-feb7b6.netlify.app/
 
 
 ### Contributing
